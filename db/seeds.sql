@@ -5,7 +5,7 @@ VALUES
     ("Finance"),
     ("Legal");
 
-INSERT INTO empRole(title, salary, department_id)
+INSERT INTO role(title, salary, department_id)
 VALUES
     ("Sales Lead", 50000, 1),
     ("Salesperson", 40000, 1),

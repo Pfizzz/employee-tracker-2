@@ -25,40 +25,40 @@ function startApp() {
         name: "choices",
         message: "Select an option from the following:",
         choices: [
-          "View all employees",
-          "View all employee positions",
-          "View all departments",
-          "Add department",
-          "Add employee",
-          "Add employee role",
-          "Update an employee role",
+          "View All Employees",
+          "View All Employees By Department",
+          "View All Employees by Manager",
+          "View all Departments",
+          "Add Employee",
+          "Update Employee Role",
+          "View all Roles",
           "Quit application",
         ],
       },
     ])
     .then((choiceAnswers) => {
       console.log(choiceAnswers);
-      if (choiceAnswers.choices === "View all employees") {
+      if (choiceAnswers.choices === "View All Employees") {
         viewEmployees();
       }
-      if (choiceAnswers.choices === "View all employee positions") {
-        viewEmpRole();
+      if (choiceAnswers.choices === "View All Employees By Department") {
+        viewRole();
       }
-
-      if (choiceAnswers.choices === "View all departments") {
+      if (choiceAnswers.choices === "View All Employees by Manager") {
+        viewManager();
+      }
+      // get rid of this later
+      if (choiceAnswers.choices === "View all Departments") {
         viewDepartment();
       }
-      if (choiceAnswers.choices === "Add department") {
-        addDepartment();
-      }
-      if (choiceAnswers.choices === "Add employee") {
+      if (choiceAnswers.choices === "Add Employee") {
         addEmployee();
       }
-      if (choiceAnswers.choices === "Add employee role") {
-        addRole();
-        if (choiceAnswers.choices === "Update an employee role") {
-          updateEmployee();
-        }
+      if (choiceAnswers.choices === "Update Employee Role") {
+        updateEmployee();
+      }
+      if (choiceAnswers.choices === "View all Roles") {
+        viewRole();
       }
       if (choiceAnswers.choices === "Quit application") {
         process.exit(1);
@@ -71,28 +71,29 @@ function viewEmployees() {
   let employeeQuery = `SELECT employee.id,
     employee.first_name,
     employee.last_name,
-    empRole.title,
+    role.title,
     employee.manager_id,
     department.id AS 'department',
-    empRole.salary 
-    FROM employee, empRole, department
-    WHERE department.id = empRole.department_id
-    AND empRole.id = employee.role_id
-    ORDER BY employee.id ASC`;
+    role.salary 
+    FROM employee, role, department
+    WHERE department.id = role.department_id
+    AND role.id = employee.role_id
+    ORDER BY employee.id ASC
+    `;
 
   db.promise()
     .query(employeeQuery)
     .then(([rows, fields]) => {
       console.table(rows);
       startApp();
-      
+
     })
     .catch(console.log)
 
-// function to view all employee roles
+  // function to view all employee roles
 }
-function viewEmpRole() {
-  db.query("SELECT * FROM empRole;", (err, result) => {
+function viewRole() {
+  db.query("SELECT * FROM role;", (err, result) => {
     if (err) {
       console.log("Something went wrong.");
     }
