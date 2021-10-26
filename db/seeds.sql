@@ -17,10 +17,11 @@ VALUES
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
 VALUES
-    ("Sally", "Blue", 2, 1),
-    ("Michael", "Pfister", 1, null);
-    -- ("Donna", "Grey", 6, 2),
-    -- ("Steven", "Yellow", 1, 1),
-    -- ("Ursula", "Pink", 5, 1),
-    -- ("Lindsay", "White", 3, 2),
-    -- ("Frank", "Black", 6, 2);
+    ("Sally", "Blue", 1, null),
+    ("Michael", "Pfister", 2, 1),
+    ("Donna", "Grey", 6, null),
+    ("Steven", "Yellow", 1, 2),
+    ("Ursula", "Pink", 5, null),
+    ("Lindsay", "White", 3, null),
+    ("Frank", "Black", 7, null),
+    ("Gary", "Busey", 6, 1);
